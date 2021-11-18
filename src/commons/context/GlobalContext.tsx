@@ -12,6 +12,8 @@ type Vehicle = {
 
 type GlobalContextType = {
   vehicles: Vehicle[]
+  addVehicle: () => void
+  removeVehicle: (id: string) => void
   getVehicle: (id: string) => Vehicle | undefined
 }
 
@@ -23,6 +25,15 @@ const GlobalContext = createContext({} as GlobalContextType)
  * @returns context
  */
 export const GlobalContextProvider: React.FC = ({ children }) => {
+  const generateNewVehicle = React.useCallback(() => {
+    return {
+      id: faker.datatype.uuid(),
+      name: faker.vehicle.vehicle(),
+      manufacturer: faker.vehicle.manufacturer(),
+      fuel: faker.vehicle.fuel(),
+    }
+  }, [])
+
   /**
    * State
    */
@@ -30,16 +41,25 @@ export const GlobalContextProvider: React.FC = ({ children }) => {
     const temp: Vehicle[] = []
 
     Array.from({ length: 5 }, () => {
-      temp.push({
-        id: faker.datatype.uuid(),
-        name: faker.vehicle.vehicle(),
-        manufacturer: faker.vehicle.manufacturer(),
-        fuel: faker.vehicle.fuel(),
-      })
+      temp.push(generateNewVehicle())
     })
 
     return temp
   })
+
+  /**
+   * Add new vehicle
+   */
+  const addVehicle = React.useCallback(() => {
+    setVehicles((state) => [...state, generateNewVehicle()])
+  }, [generateNewVehicle])
+
+  /**
+   * Remove a vehicle
+   */
+  const removeVehicle = React.useCallback((id: string) => {
+    setVehicles((state) => state.filter((item) => item.id !== id))
+  }, [])
 
   /**
    * Get a specific vehicle
@@ -54,6 +74,8 @@ export const GlobalContextProvider: React.FC = ({ children }) => {
    */
   const context: GlobalContextType = {
     vehicles,
+    addVehicle,
+    removeVehicle,
     getVehicle,
   }
 

@@ -11,3 +11,9 @@ export const Title = styled.h1`
   padding: 2rem 0;
   text-align: center;
 `
+
+export const Actions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+`

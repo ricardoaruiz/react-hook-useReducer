@@ -7,6 +7,7 @@ import * as S from './styles'
 export type VehicleProps = {
   data: VehicleData
   onClick?: (id: string) => void
+  onDelete?: (id: string) => void
 }
 
 export type VehicleData = {
@@ -16,10 +17,22 @@ export type VehicleData = {
   fuel: string
 }
 
-export const Vehicle: React.VFC<VehicleProps> = ({
+const Vehicle: React.VFC<VehicleProps> = ({
   data: { id, name, manufacturer, fuel },
   onClick,
+  onDelete,
 }) => {
+  /**
+   * Handle delete button click
+   */
+  const handleDeleteItemClick = React.useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
+      event.stopPropagation()
+      onDelete && onDelete(id)
+    },
+    [onDelete]
+  )
+
   return (
     <S.Wrapper onClick={() => onClick && onClick(id)}>
       <S.Content>
@@ -29,10 +42,16 @@ export const Vehicle: React.VFC<VehicleProps> = ({
       </S.Content>
 
       <S.Actions>
-        <Button variant="outlined">
+        <Button
+          variant="outlined"
+          onClick={(e) => handleDeleteItemClick(e, id)}
+        >
           <S.DeleteButton />
         </Button>
       </S.Actions>
     </S.Wrapper>
   )
 }
+
+const VehicleMemoized = React.memo(Vehicle)
+export { VehicleMemoized as Vehicle }
