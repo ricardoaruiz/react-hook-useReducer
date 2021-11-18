@@ -1,21 +1,30 @@
 import React from 'react'
-import { Button } from '../../..'
+
+import { Button } from '../../../Button'
 
 import * as S from './styles'
 
 export type VehicleProps = {
+  data: VehicleData
+  onClick?: (id: string) => void
+}
+
+export type VehicleData = {
   id: string
   name: string
-  model: string
+  manufacturer: string
   fuel: string
 }
 
-export const Vehicle: React.VFC<VehicleProps> = ({ name, model, fuel }) => {
+export const Vehicle: React.VFC<VehicleProps> = ({
+  data: { id, name, manufacturer, fuel },
+  onClick,
+}) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={() => onClick && onClick(id)}>
       <S.Content>
         <S.ItemContent>{name}</S.ItemContent>
-        <S.ItemContent>{model}</S.ItemContent>
+        <S.ItemContent>{manufacturer}</S.ItemContent>
         <S.ItemContent>{fuel}</S.ItemContent>
       </S.Content>
 

@@ -1,20 +1,24 @@
 import React from 'react'
 
-import { Vehicle, VehicleProps } from './components/Vehicle'
+import { Vehicle, VehicleData } from './components/Vehicle'
 
 import * as S from './styles'
 
 type VehiclesProps = {
-  data: VehicleProps[]
+  data: VehicleData[]
+  onItemClick?: (id: string) => void
 }
 
-export const VehicleList: React.VFC<VehiclesProps> = ({ data }) => {
+export const VehicleList: React.VFC<VehiclesProps> = ({
+  data,
+  onItemClick,
+}) => {
   return (
     <S.Wrapper>
       {!data.length && <S.Empty>No vehicles to list</S.Empty>}
 
       {data.map((item) => (
-        <Vehicle key={item.id} {...item} />
+        <Vehicle key={item.id} data={item} onClick={onItemClick} />
       ))}
     </S.Wrapper>
   )
