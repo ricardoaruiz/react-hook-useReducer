@@ -1,33 +1,30 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
+import { useGlobalContext } from '../../commons/context/GlobalContext'
 import { Button } from '../../components/Button'
 
 import * as S from './styles'
 
-type LocationType = {
-  data: VehicleData
-}
-
-type VehicleData = {
-  id: string
-  name: string
-  manufacturer: string
-  fuel: string
-}
-
 export const Vehicle: React.VFC = () => {
   const history = useHistory()
-  const { state } = useLocation<LocationType>()
+  const { id } = useParams<{ id: string }>()
+  const { getVehicle } = useGlobalContext()
 
   const data = React.useMemo(() => {
-    if (!state) {
+    if (!id) {
       history.push('/')
       return null
     }
-    const { name, manufacturer, fuel } = state.data
-    return { name, manufacturer, fuel }
-  }, [history, state])
+
+    const vehicle = getVehicle(id)
+
+    return {
+      name: vehicle?.name,
+      manufacturer: vehicle?.manufacturer,
+      fuel: vehicle?.fuel,
+    }
+  }, [getVehicle, history, id])
 
   return (
     data && (
