@@ -5,8 +5,9 @@ export const Content = styled.div``
 
 export const ItemContent = styled.p`
   font-weight: 600;
+  font-size: 2rem;
   & + p {
-    margin-top: 0.4rem;
+    margin-top: 0.8rem;
   }
 `
 
@@ -14,7 +15,7 @@ export const Actions = styled.div``
 
 export const DeleteButton = styled(DeleteDismiss)`
   ${({ theme }) => css`
-    width: 1.8rem;
+    width: 2.5rem;
     color: ${theme.colors.black};
   `};
 `
@@ -24,7 +25,7 @@ export const Wrapper = styled.li`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 1rem;
     background-color: ${theme.colors.primary};
     color: ${theme.colors.white};
     border-radius: 0.2rem;
@@ -32,7 +33,7 @@ export const Wrapper = styled.li`
     cursor: pointer;
 
     & + li {
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
 
     &:hover {
