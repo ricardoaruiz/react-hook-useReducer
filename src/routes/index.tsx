@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { GlobalContextProvider } from '../commons/context/GlobalContext'
 import { Vehicle } from '../pages/Vehicle'
 import { Vehicles } from '../pages/Vehicles'
+import { Counter } from '../pages/Counter'
 
 export const Routes = () => {
   return (
