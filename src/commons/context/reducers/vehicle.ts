@@ -1,3 +1,5 @@
+import { StyledIcon } from '@styled-icons/styled-icon'
+
 /**
  * Type for Vehicle
  */
@@ -6,6 +8,7 @@ export type Vehicle = {
   name: string
   manufacturer: string
   fuel: string
+  icon: StyledIcon
 }
 
 /**

@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyledIcon } from '@styled-icons/styled-icon'
 
 import { Button } from '../../../Button'
 
@@ -15,10 +16,11 @@ export type VehicleData = {
   name: string
   manufacturer: string
   fuel: string
+  icon: StyledIcon
 }
 
 const Vehicle: React.VFC<VehicleProps> = ({
-  data: { id, name, manufacturer, fuel },
+  data: { id, name, manufacturer, fuel, icon: Icon },
   onClick,
   onDelete,
 }) => {
@@ -58,7 +60,9 @@ const Vehicle: React.VFC<VehicleProps> = ({
     <S.Wrapper onClick={() => onClick && onClick(id)} className={classes}>
       <S.Content>
         <S.ItemContent>{name}</S.ItemContent>
-        <S.ItemContent>{manufacturer}</S.ItemContent>
+        <S.ItemContent>
+          {manufacturer} <Icon className="brand" />
+        </S.ItemContent>
         <S.ItemContent>{fuel}</S.ItemContent>
       </S.Content>
 

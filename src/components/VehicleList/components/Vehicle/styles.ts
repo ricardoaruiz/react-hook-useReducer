@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components'
 import { DeleteDismiss } from '@styled-icons/fluentui-system-regular/DeleteDismiss'
 
-export const Content = styled.div``
+export const Content = styled.div`
+  & .brand {
+    width: 3rem;
+  }
+`
 
 export const ItemContent = styled.p`
   font-weight: 600;

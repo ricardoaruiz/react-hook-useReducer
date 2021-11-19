@@ -48,6 +48,10 @@ export const Text = styled.p`
   ${({ theme }) => css`
     font-size: 2.5rem;
     color: ${theme.colors.white};
+
+    & .brand {
+      width: 3rem;
+    }
   `}
 `
 

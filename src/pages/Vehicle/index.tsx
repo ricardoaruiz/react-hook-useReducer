@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import { Prohibited } from '@styled-icons/fluentui-system-filled/Prohibited'
 
 import { useGlobalContext } from '../../commons/context/GlobalContext'
 import { Button } from '../../components/Button'
@@ -23,8 +24,11 @@ export const Vehicle: React.VFC = () => {
       name: vehicle?.name,
       manufacturer: vehicle?.manufacturer,
       fuel: vehicle?.fuel,
+      icon: vehicle?.icon,
     }
   }, [getVehicle, history, id])
+
+  const Icon = data?.icon || Prohibited
 
   return (
     data && (
@@ -39,7 +43,10 @@ export const Vehicle: React.VFC = () => {
 
           <S.Information>
             <S.Label>Marca</S.Label>
-            <S.Text>{data.manufacturer}</S.Text>
+            <S.Text>
+              {data.manufacturer}
+              <Icon className="brand" />
+            </S.Text>
           </S.Information>
 
           <S.Information>
