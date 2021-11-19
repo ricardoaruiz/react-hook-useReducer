@@ -8,7 +8,8 @@ import * as S from './styles'
 
 export const Vehicles: React.FC = () => {
   const history = useHistory()
-  const { vehicles, addVehicle, removeVehicle } = useGlobalContext()
+  const { vehicles, addVehicle, removeVehicle, counter, increment } =
+    useGlobalContext()
 
   /**
    * Handle item click
@@ -30,6 +31,14 @@ export const Vehicles: React.FC = () => {
     [removeVehicle]
   )
 
+  /**
+   * Handle add new vehicle button click
+   */
+  const handleAddNewItemClick = React.useCallback(() => {
+    addVehicle()
+    increment()
+  }, [addVehicle, increment])
+
   return (
     <S.Container>
       <S.Title>Vehicles</S.Title>
@@ -40,7 +49,9 @@ export const Vehicles: React.FC = () => {
       />
 
       <S.Actions>
-        <Button onClick={addVehicle}>add new</Button>
+        <Button onClick={handleAddNewItemClick}>
+          added new {counter} vehicles
+        </Button>
       </S.Actions>
     </S.Container>
   )

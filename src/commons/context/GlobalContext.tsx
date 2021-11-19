@@ -3,11 +3,17 @@ import React, { createContext, useContext } from 'react'
 /**
  * Vehicle hook that contains state and use reducer
  */
-import { UseVehicleType, useVehicle } from './hooks/useVehicle'
+import { useVehicle, UseVehicleType } from './hooks/useVehicle'
 
-type GlobalContextType = UseVehicleType
+/**
+ * Counter hook that contains state and use reducer
+ */
+import { useCounter, UseCounterType } from './hooks/useCounter'
+
+type GlobalContextType = UseVehicleType & UseCounterType
 
 const GlobalContext = createContext({} as GlobalContextType)
+GlobalContext.displayName = 'GlobalContext'
 
 /**
  * GlobalContextProvider
@@ -16,6 +22,7 @@ const GlobalContext = createContext({} as GlobalContextType)
  */
 export const GlobalContextProvider: React.FC = ({ children }) => {
   const { vehicles, addVehicle, removeVehicle, getVehicle } = useVehicle()
+  const { counter, decrement, increment } = useCounter()
 
   /**
    * Context exported object
@@ -25,6 +32,9 @@ export const GlobalContextProvider: React.FC = ({ children }) => {
     addVehicle,
     removeVehicle,
     getVehicle,
+    counter,
+    increment,
+    decrement,
   }
 
   return (

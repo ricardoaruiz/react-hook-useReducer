@@ -9,7 +9,7 @@ import * as S from './styles'
 export const Vehicle: React.VFC = () => {
   const history = useHistory()
   const { id } = useParams<{ id: string }>()
-  const { getVehicle } = useGlobalContext()
+  const { getVehicle, counter } = useGlobalContext()
 
   const data = React.useMemo(() => {
     if (!id) {
@@ -51,6 +51,8 @@ export const Vehicle: React.VFC = () => {
         <S.Actions>
           <Button onClick={() => history.goBack()}>Voltar</Button>
         </S.Actions>
+
+        <p>Added new {counter} vehicles</p>
       </S.Container>
     )
   )
