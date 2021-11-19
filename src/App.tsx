@@ -1,5 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
+import 'animate.css/animate.min.css'
 
 import { myTheme } from './styles/Theme'
 import { GlobalStyles } from './styles/GlobalStyles'

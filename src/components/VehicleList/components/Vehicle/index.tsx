@@ -22,19 +22,40 @@ const Vehicle: React.VFC<VehicleProps> = ({
   onClick,
   onDelete,
 }) => {
+  const [componentState, setComponentState] = React.useState<
+    'in' | 'out' | 'ready'
+  >('in')
+
+  const classes = React.useMemo(() => {
+    if (componentState === 'in')
+      return 'animate__animated animate__lightSpeedInLeft'
+    if (componentState === 'out')
+      return 'animate__animated animate__lightSpeedOutRight'
+    if (componentState === 'ready') return ''
+  }, [componentState])
+
   /**
    * Handle delete button click
    */
   const handleDeleteItemClick = React.useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
       event.stopPropagation()
-      onDelete && onDelete(id)
+      setComponentState('out')
+      setTimeout(() => {
+        onDelete && onDelete(id)
+      }, 1000)
     },
     [onDelete]
   )
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      setComponentState('ready')
+    }, 500)
+  }, [])
+
   return (
-    <S.Wrapper onClick={() => onClick && onClick(id)}>
+    <S.Wrapper onClick={() => onClick && onClick(id)} className={classes}>
       <S.Content>
         <S.ItemContent>{name}</S.ItemContent>
         <S.ItemContent>{manufacturer}</S.ItemContent>

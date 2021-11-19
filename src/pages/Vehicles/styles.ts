@@ -10,6 +10,11 @@ export const Title = styled.h1`
   font-size: 4rem;
   padding: 2rem 0;
   text-align: center;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `
 
 export const Actions = styled.div`

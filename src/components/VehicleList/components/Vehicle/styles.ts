@@ -31,12 +31,14 @@ export const Wrapper = styled.li`
     border-radius: 0.2rem;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
     cursor: pointer;
+    transition: all 0.2s;
 
     & + li {
       margin-top: 1rem;
     }
 
     &:hover {
+      transform: scale(1.01);
       background-color: ${theme.colors.privaryHover};
 
       ${ItemContent} {

@@ -7,6 +7,7 @@ import { Button, VehicleList } from '../../components'
 import * as S from './styles'
 
 export const Vehicles: React.FC = () => {
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
   const history = useHistory()
   const { vehicles, addVehicle, removeVehicle, counter, increment } =
     useGlobalContext()
@@ -39,6 +40,18 @@ export const Vehicles: React.FC = () => {
     increment()
   }, [addVehicle, increment])
 
+  /**
+   * Handle hover operation in an item
+   */
+  const handleButtonHover = React.useCallback((operation: 'in' | 'out') => {
+    operation === 'in'
+      ? buttonRef.current?.classList.add('animate__animated', 'animate__tada')
+      : buttonRef.current?.classList.remove(
+          'animate__animated',
+          'animate__tada'
+        )
+  }, [])
+
   return (
     <S.Container>
       <S.Title>Vehicles</S.Title>
@@ -49,7 +62,12 @@ export const Vehicles: React.FC = () => {
       />
 
       <S.Actions>
-        <Button onClick={handleAddNewItemClick}>
+        <Button
+          onClick={handleAddNewItemClick}
+          onMouseEnter={() => handleButtonHover('in')}
+          onMouseLeave={() => handleButtonHover('out')}
+          ref={buttonRef}
+        >
           added new {counter} vehicles
         </Button>
       </S.Actions>
